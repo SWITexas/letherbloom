@@ -75,7 +75,7 @@ export default function PlanCard({
         body: JSON.stringify({
           priceId: finalPriceId,
           planName: name,
-          duration: name === "Elite" ? eliteDuration : undefined
+          duration: (name === "Elite" || name === "Personal Training") ? eliteDuration : undefined
         }),
       });
 

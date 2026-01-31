@@ -18,7 +18,7 @@ const stripePromise = loadStripe(
 );
 
 interface PaymentStepProps {
-  plan: { name: string; priceId: string };
+  plan: { name: string; priceId: string; duration?: number };
   onBack: () => void;
 }
 
@@ -35,6 +35,7 @@ export default function PaymentStep({ plan, onBack }: PaymentStepProps) {
       body: JSON.stringify({
         priceId: plan.priceId,
         planName: plan.name,
+        duration: plan.duration,
         uiMode: "embedded",
       }),
     })

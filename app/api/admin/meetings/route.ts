@@ -8,7 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { title, meeting_number, meeting_password, start_time, details } = body;
+    const { title, meeting_number, meeting_password, start_time, details, allowed_plans } = body;
 
     if (!meeting_number) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -22,6 +22,7 @@ export async function POST(req: Request) {
       meeting_password: meeting_password || null,
       start_time: start_time ? new Date(start_time).toISOString() : null,
       details: detailsObj,
+      allowed_plans: Array.isArray(allowed_plans) ? allowed_plans : [],
     }).select().single();
 
     if (error) {
@@ -77,6 +78,7 @@ export async function PATCH(req: Request) {
     if (body.start_time !== undefined) allowedFields.start_time = body.start_time ? new Date(body.start_time).toISOString() : null;
     if (body.details !== undefined) allowedFields.details = body.details ? { description: String(body.details) } : null;
     if (body.is_ended !== undefined) allowedFields.is_ended = body.is_ended;
+    if (body.allowed_plans !== undefined) allowedFields.allowed_plans = Array.isArray(body.allowed_plans) ? body.allowed_plans : [];
 
     const { data, error } = await supabase
       .from("meetings")

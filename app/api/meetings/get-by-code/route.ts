@@ -28,7 +28,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Code expired" }, { status: 401 });
     }
 
-    const { data, error } = await supabase
+    const userPlan = codeData.plan || "Unknown";
+
+    // Fetch meetings
+    // Logic: show meetings that are either public (empty allowed_plans) 
+    // OR have the user's plan in their allowed_plans list.
+    const { data: allMeetings, error } = await supabase
       .from("meetings")
       .select("*")
       .eq("is_ended", false)
@@ -39,7 +44,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    const meetings = data || [];
+    const meetings = (allMeetings || []).filter((m: any) => {
+      // If allowed_plans is empty or not set, it's accessible to everyone with a code
+      if (!m.allowed_plans || m.allowed_plans.length === 0) return true;
+
+      // Otherwise, user must have a matching plan
+      return m.allowed_plans.includes(userPlan);
+    });
 
     return NextResponse.json({ meetings });
   } catch (err: any) {

@@ -124,8 +124,13 @@ export async function POST(req: Request) {
           return NextResponse.json({ received: true });
         }
 
-        const expVal =
-          planName === "Basic" ? 1 : planName === "Premium" ? 3 : 6;
+        // Calculate expiration
+        let expVal = 1; // Default 1 month
+        if (planName === "Premium") expVal = 3;
+        if (planName === "Elite" || planName === "Personal Training") {
+          expVal = parseInt(session.metadata?.durationMonths || "6");
+        }
+
         const expiresAt = new Date();
         expiresAt.setMonth(expiresAt.getMonth() + expVal);
 

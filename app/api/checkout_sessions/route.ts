@@ -31,13 +31,15 @@ export async function POST(request: Request) {
     // Check if priceId is a real Stripe ID (starts with 'price_' and not our test placeholder)
     // Actually, real price IDs also start with 'price_', so we check if it matches our specific placeholders
     const isPlaceholder =
-      priceId.startsWith("price_1") &&
+      (priceId.startsWith("price_1") || priceId.startsWith("price_")) &&
       (priceId.includes("Basic") ||
         priceId.includes("Premium") ||
         priceId.includes("Elite") ||
         priceId.includes("Starter") ||
         priceId.includes("Popular") ||
-        priceId.includes("Coach"));
+        priceId.includes("Coach") ||
+        priceId.includes("group") ||
+        priceId.includes("functional"));
 
     if (isPlaceholder) {
       // Use inline price data for development without creating products in Stripe Dashboard
@@ -47,9 +49,10 @@ export async function POST(request: Request) {
         interval: "month",
       };
 
-      if (planName === "Premium") unitAmount = 5900;
+      if (planName === "Premium" || planName === "Individual Group") unitAmount = 3900;
+      if (planName === "Functional Core") unitAmount = 4900;
 
-      if (planName === "Elite") {
+      if (planName === "Elite" || planName === "Personal Training") {
         const duration = requestBody.duration || 1;
         unitAmount = 5900 * duration;
         // For multi-month duration, treating as one-time payment for access period

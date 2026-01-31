@@ -21,7 +21,7 @@ export default function OurVisionSection() {
                         </h2>
                         <div className="space-y-6 text-lg text-zinc-700 md:text-xl leading-relaxed">
                             <p>
-                                We envision a future where every woman embraces her strength without apology. Where fitness is not a punishment, but a celebration of what your body can do.
+                                We envision a future where every woman embraces her strength without apology. Where fitness is not a punishment, but a celebration of what your body can do amd a window into wellness.
                             </p>
                             <p>
                                 By combining physical training with mindfulness and community support, we are building a legacy of health that extends far beyond the gym walls. We want you to feel vibrant, centered, and unstoppable.

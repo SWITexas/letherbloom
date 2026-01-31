@@ -39,7 +39,7 @@ export default function OurMissionSection() {
                             Redefining <span className="text-rose-400">Strength</span>
                         </h2>
                         <p className="text-lg text-zinc-300 md:text-xl leading-relaxed mb-8">
-                            Our mission is to empower you to feel capable in every aspect of your life. We focus heavily on **functional upper body strength**—often neglected but essential for posture, confidence, and daily power.
+                            Our mission is to empower you to feel capable in every aspect of your life. We focus on **functional body strength**—often neglected but essential for posture, confidence, and daily power.
                         </p>
 
                         <div className="grid gap-6">

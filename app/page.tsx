@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
@@ -13,13 +14,15 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const [trainingType, setTrainingType] = useState<"personal" | "group" | "functional">("personal");
+
   return (
     <div className="bg-white font-sans text-foreground">
       <Navigation />
       <HeroSection />
       <AccessibilitySection />
-      <TrainingsSection />
-      <PricingSection />
+      <TrainingsSection selectedType={trainingType} onSelect={setTrainingType} />
+      <PricingSection selectedType={trainingType} onTypeChange={setTrainingType} />
       <TestimonialsSection />
       <PhilosophySection />
       <CommunitySection />

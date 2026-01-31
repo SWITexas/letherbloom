@@ -88,6 +88,7 @@ export async function POST(request: Request) {
 
         // Generate admin password
         const adminPassword = generateRandomPassword();
+        console.log(adminPassword);
         const passwordHash = await hashPassword(adminPassword);
 
         // Create admin user

@@ -16,18 +16,18 @@ export default function OurStorySection() {
                         viewport={{ once: true }}
                     >
                         <div className="text-rose-600 font-semibold tracking-wider uppercase mb-2">Since 2024</div>
-                        <h2 className="text-4xl font-black leading-tight md:text-5xl lg:text-6xl mb-6">
-                            Written by Women, <span className="text-rose-600">for Women</span>
+                        <h2 className="text-4xl font-black leading-tight  md:text-5xl lg:text-6xl mb-6">
+                            Created by Women, <span className="text-rose-600">for Women</span>
                         </h2>
                         <div className="space-y-4 text-lg text-zinc-600 md:text-xl leading-relaxed">
                             <p>
                                 LetHerBloom started with a simple observation: many fitness spaces, while functional, lacked the specific supportive environment that allows women to truly thrive.
                             </p>
                             <p>
-                                We wanted to create more than just a gym. We envisioned a sanctuary where the clanging of weights represents the breaking of barriers. A place where you don't just work out; you belong.
+                                We wanted to create more than just a gym. We envisioned a wellness sanctuary where the clanging of weights represents the breaking of barriers. A place where you don't just work out; you bloom.
                             </p>
                             <p>
-                                What began as a small meet-up group has blossomed into a movement, uniting women from all walks of life under one common goal: to be their strongest selves.
+                                What began as a small meet-up group has blossomed into a movement, uniting women from all walks of life under one common goal: to be the best version of themselves.
                             </p>
                         </div>
                     </motion.div>

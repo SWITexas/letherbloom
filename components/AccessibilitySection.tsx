@@ -22,7 +22,7 @@ export default function AccessibilitySection() {
             </h2>
             <p className="mt-6 text-lg text-zinc-700">
               Whether you're a complete beginner or an experienced lifter, we
-              have a variety of equipment and classes to build your skills. Join
+              use a variety of equipment and classes to build your skills. Join
               a thriving community dedicated to your success.
             </p>
 
@@ -30,8 +30,9 @@ export default function AccessibilitySection() {
               {[
                 "Expert coaches with years of experience",
                 "Flexible schedules that work with your life",
-                "Supportive community of women lifters",
                 "Form-first approach to prevent injury",
+                "Supportive community of women empowering eachother",
+
               ].map((item, index) => (
                 <motion.div
                   key={item}
@@ -64,8 +65,7 @@ export default function AccessibilitySection() {
                 className="h-48 w-48 object-contain mb-4"
               />
               <p className="text-zinc-700">
-                Build the strength and confidence to achieve your goals, both in
-                the gym and in life.
+                Build the strength and confidence to achieve your goals anytime, anywhere.
               </p>
             </div>
           </motion.div>

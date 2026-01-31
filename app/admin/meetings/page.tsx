@@ -10,8 +10,24 @@ export default function AdminMeetingsPage() {
   const [meetingPassword, setMeetingPassword] = useState("");
   const [startTime, setStartTime] = useState("");
   const [details, setDetails] = useState("");
+  const [allowedPlans, setAllowedPlans] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+
+  const availablePlans = [
+    "Personal Training",
+    "Individual Group",
+    "Corporate Group",
+    "Functional Core"
+  ];
+
+  const handlePlanToggle = (plan: string) => {
+    setAllowedPlans(prev =>
+      prev.includes(plan)
+        ? prev.filter(p => p !== plan)
+        : [...prev, plan]
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +41,7 @@ export default function AdminMeetingsPage() {
         meeting_password: meetingPassword,
         start_time: startTime || null,
         details: details || null,
+        allowed_plans: allowedPlans,
       };
 
       const res = await fetch("/api/admin/meetings", {
@@ -43,6 +60,7 @@ export default function AdminMeetingsPage() {
       setMeetingPassword("");
       setStartTime("");
       setDetails("");
+      setAllowedPlans([]);
     } catch (err: any) {
       setMessage(err.message || "Unknown error");
     } finally {
@@ -85,9 +103,27 @@ export default function AdminMeetingsPage() {
             <textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Event description" className="w-full rounded border px-3 py-2" rows={4} />
           </div>
 
+          <div>
+            <label className="mb-2 block text-sm font-medium">Allowed Plans (Access Control)</label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4 bg-zinc-50 rounded-xl border border-zinc-200">
+              {availablePlans.map((plan) => (
+                <label key={plan} className="flex items-center gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={allowedPlans.includes(plan)}
+                    onChange={() => handlePlanToggle(plan)}
+                    className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-zinc-300"
+                  />
+                  <span className="text-sm text-zinc-700 group-hover:text-zinc-900 transition-colors">{plan}</span>
+                </label>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-zinc-500 italic">Select which training plans can view and join this meeting.</p>
+          </div>
+
           <div className="flex items-center gap-3">
             <button disabled={isLoading} className="rounded bg-rose-600 px-4 py-2 text-white disabled:opacity-50">{isLoading ? "Creating..." : "Create Meeting"}</button>
-            <button type="button" onClick={() => { setTitle(""); setMeetingNumber(""); setMeetingPassword(""); setStartTime(""); setDetails(""); setMessage(null); }} className="rounded border px-4 py-2">Reset</button>
+            <button type="button" onClick={() => { setTitle(""); setMeetingNumber(""); setMeetingPassword(""); setStartTime(""); setDetails(""); setAllowedPlans([]); setMessage(null); }} className="rounded border px-4 py-2">Reset</button>
           </div>
 
           {message && (
