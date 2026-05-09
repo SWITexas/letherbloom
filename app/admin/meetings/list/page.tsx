@@ -93,11 +93,16 @@ export default function MeetingsListPage() {
 
   const startEdit = (meeting: any) => {
     setEditingId(meeting.id);
+    const date = meeting.start_time ? new Date(meeting.start_time) : null;
+    const localStartTime = date 
+      ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+      : "";
+
     setEditForm({
       title: meeting.title || "",
       meeting_number: meeting.meeting_number,
       meeting_password: meeting.meeting_password || "",
-      start_time: meeting.start_time ? meeting.start_time.substring(0, 16) : "",
+      start_time: localStartTime,
       details: meeting.details?.description || "",
       allowed_plans: Array.isArray(meeting.allowed_plans) ? meeting.allowed_plans : [],
     });
@@ -115,10 +120,15 @@ export default function MeetingsListPage() {
   const handleUpdate = async () => {
     setIsUpdating(true);
     try {
+      const payload = {
+        ...editForm,
+        start_time: editForm.start_time ? new Date(editForm.start_time).toISOString() : null,
+      };
+
       const res = await fetch(`/api/admin/meetings?id=${editingId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editForm),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("Failed to update meeting");
       toast.success("Meeting updated successfully");

@@ -207,14 +207,7 @@ function LiveTrainingContent() {
   }, []);
 
   const handleJoinMeeting = useCallback((meeting: Meeting) => {
-    // Mobile devices open the native Zoom App or Zoom's smart redirect page
-    if (window.innerWidth <= 768) {
-      const zoomUrl = `https://zoom.us/j/${meeting.meeting_number}?pwd=${meeting.meeting_password || ""}`;
-      window.open(zoomUrl, "_blank");
-      return;
-    }
-
-    // Tablets and Desktop use the embedded view
+    // All devices use the embedded view to ensure seamless joining with pre-filled credentials
     setSelectedMeeting(meeting);
     setShowNameInput(true);
   }, []);

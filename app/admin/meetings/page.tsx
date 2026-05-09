@@ -39,7 +39,7 @@ export default function AdminMeetingsPage() {
         title,
         meeting_number: meetingNumber,
         meeting_password: meetingPassword,
-        start_time: startTime || null,
+        start_time: startTime ? new Date(startTime).toISOString() : null,
         details: details || null,
         allowed_plans: allowedPlans,
       };
