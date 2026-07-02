@@ -145,7 +145,7 @@ export default function ContactSection() {
                 <div className="text-3xl mb-2">📧</div>
                 <p className="text-sm text-zinc-600">Email</p>
                 <p className="font-semibold text-zinc-900">
-                  hello@letherbloom.com
+                  hello@lhbloom.org
                 </p>
               </div>
               <div className="text-center">

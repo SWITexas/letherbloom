@@ -198,7 +198,7 @@ export default function CodeEntry({ onSuccess, initialCode }: CodeEntryProps) {
                         <p className="mt-2 text-xs text-zinc-400">
                             Having trouble?{" "}
                             <a
-                                href="mailto:support@letherbloom.com"
+                                href="mailto:support@lhbloom.org"
                                 className="hover:text-zinc-600 hover:underline"
                             >
                                 Contact Support

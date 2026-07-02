@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Corporate & Organization Plans | LetHerBloom",
     description: "Empower your female workforce with custom virtual upper body gymnastics, calisthenics, and posture training. Manage organization seats and licenses.",
-    url: "https://letherbloom.com/pricing/organization",
+    url: "https://www.lhbloom.org/pricing/organization",
     siteName: "LetHerBloom",
     images: [
       {
@@ -45,8 +45,8 @@ export default function OrganizationPricingPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://letherbloom.com/pricing/organization/#webpage",
-        "url": "https://letherbloom.com/pricing/organization",
+        "@id": "https://www.lhbloom.org/pricing/organization/#webpage",
+        "url": "https://www.lhbloom.org/pricing/organization",
         "name": "Corporate & Organization Plans | LetHerBloom",
         "description": "Empower your female workforce or group with custom virtual gymnastics, calisthenics, and posture training.",
         "breadcrumb": {
@@ -56,19 +56,19 @@ export default function OrganizationPricingPage() {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://letherbloom.com"
+              "item": "https://www.lhbloom.org"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Pricing",
-              "item": "https://letherbloom.com/pricing"
+              "item": "https://www.lhbloom.org/pricing"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Organization",
-              "item": "https://letherbloom.com/pricing/organization"
+              "item": "https://www.lhbloom.org/pricing/organization"
             }
           ]
         }
@@ -83,7 +83,7 @@ export default function OrganizationPricingPage() {
           "priceCurrency": "USD",
           "unitText": "seat/month"
         },
-        "url": "https://letherbloom.com/pricing/organization"
+        "url": "https://www.lhbloom.org/pricing/organization"
       }
     ]
   };

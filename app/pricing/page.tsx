@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pricing Plans | LetHerBloom - Ladies Upper Body Gym & Gymnastics",
     description: "Find the perfect virtual plan for ladies' upper body gymnastics, calisthenics, and posture correction training. Flexible individual and group subscriptions.",
-    url: "https://letherbloom.com/pricing",
+    url: "https://www.lhbloom.org/pricing",
     siteName: "LetHerBloom",
     images: [
       {
@@ -46,7 +46,7 @@ export default function PricingPage() {
       {
         "@type": "WebPage",
         "@id": "https://www.lhbloom.org/pricing/#webpage",
-        "url": "https://letherbloom.com/pricing",
+        "url": "https://www.lhbloom.org/pricing",
         "name": "Pricing Plans | LetHerBloom",
         "description": "Find the perfect virtual plan for ladies' upper body gymnastics, calisthenics, and posture correction training.",
         "breadcrumb": {
@@ -56,13 +56,13 @@ export default function PricingPage() {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://letherbloom.com"
+              "item": "https://www.lhbloom.org"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Pricing",
-              "item": "https://letherbloom.com/pricing"
+              "item": "https://www.lhbloom.org/pricing"
             }
           ]
         }
@@ -73,7 +73,7 @@ export default function PricingPage() {
         "lowPrice": "15",
         "highPrice": "39.99",
         "offerCount": "4",
-        "url": "https://letherbloom.com/pricing"
+        "url": "https://www.lhbloom.org/pricing"
       }
     ]
   };

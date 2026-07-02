@@ -178,7 +178,7 @@ function PaymentSuccessContent() {
             <p className="text-xs text-zinc-400">
               Need help?{" "}
               <a
-                href="mailto:support@letherbloom.com"
+                href="mailto:support@lhbloom.org"
                 className="text-zinc-600 hover:underline"
               >
                 Contact Support

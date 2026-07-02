@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LetHerBloom | Women's Upper Body Strength Training",
     description: "Empowering women through focused upper-body strength, mobility, and confidence-building workouts. Join our community designed for women at every fitness level.",
-    url: "https://letherbloom.com",
+    url: "https://www.lhbloom.org",
     siteName: "LetHerBloom",
     images: [
       {

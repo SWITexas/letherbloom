@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Live Virtual Sessions | LetHerBloom - Ladies Upper Body Gym",
     description: "Join our live-streamed virtual training classes for ladies' upper body calisthenics, strength conditioning, posture correction, and gymnastics.",
-    url: "https://letherbloom.com/live-training",
+    url: "https://www.lhbloom.org/live-training",
     siteName: "LetHerBloom",
     images: [
       {
@@ -51,12 +51,12 @@ export default function LiveContentPage() {
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {
       "@type": "VirtualLocation",
-      "url": "https://letherbloom.com/live-training"
+      "url": "https://www.lhbloom.org/live-training"
     },
     "organizer": {
       "@type": "Organization",
       "name": "LetHerBloom",
-      "url": "https://letherbloom.com"
+      "url": "https://www.lhbloom.org"
     }
   };
 

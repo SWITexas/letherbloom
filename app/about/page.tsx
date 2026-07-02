@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Us | LetHerBloom - Ladies Upper Body Gym & Gymnastics",
     description: "Learn about the mission and vision of LetHerBloom, a dedicated virtual gym for ladies' upper body calisthenics, strength, and gymnastics training.",
-    url: "https://letherbloom.com/about",
+    url: "https://www.lhbloom.org/about",
     siteName: "LetHerBloom",
     images: [
       {
@@ -50,8 +50,8 @@ export default function AboutPage() {
     "@graph": [
       {
         "@type": "AboutPage",
-        "@id": "https://letherbloom.com/about/#webpage",
-        "url": "https://letherbloom.com/about",
+        "@id": "https://www.lhbloom.org/about/#webpage",
+        "url": "https://www.lhbloom.org/about",
         "name": "About Us | LetHerBloom",
         "description": "Learn about the mission, vision, and story of LetHerBloom - the leading virtual gymnastics and calisthenics space for women.",
         "breadcrumb": {
@@ -61,23 +61,23 @@ export default function AboutPage() {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://letherbloom.com"
+              "item": "https://www.lhbloom.org"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "About",
-              "item": "https://letherbloom.com/about"
+              "item": "https://www.lhbloom.org/about"
             }
           ]
         }
       },
       {
         "@type": "SportsOrganization",
-        "@id": "https://letherbloom.com/#organization",
+        "@id": "https://www.lhbloom.org/#organization",
         "name": "LetHerBloom",
-        "url": "https://letherbloom.com",
-        "logo": "https://letherbloom.com/logo/flower-logo.png"
+        "url": "https://www.lhbloom.org",
+        "logo": "https://www.lhbloom.org/logo/flower-logo.png"
       }
     ]
   };

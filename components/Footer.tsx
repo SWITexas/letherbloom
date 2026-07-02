@@ -144,10 +144,10 @@ export default function Footer() {
                 <li>
                   <p className="text-sm text-zinc-400">Email</p>
                   <Link
-                    href="mailto:hello@letherbloom.com"
+                    href="mailto:hello@lhbloom.org"
                     className="text-white transition hover:text-rose-500"
                   >
-                    hello@letherbloom.com
+                    hello@lhbloom.org
                   </Link>
                 </li>
                 <li>

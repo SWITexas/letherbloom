@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LetHerBloom | Women's Upper Body Calisthenics & Strength",
     description: "Empower your fitness journey with virtual gymnastics, calisthenics, and posture training designed specifically for women.",
-    url: "https://letherbloom.com",
+    url: "https://www.lhbloom.org",
     siteName: "LetHerBloom",
     images: [
       {
@@ -52,8 +52,8 @@ export default function Home() {
     "@type": "SportsActivityLocation",
     "name": "LetHerBloom",
     "image": "https://www.lhbloom.org/images/Gemini_Generated_Image_251cny251cny251c.png",
-    "@id": "https://letherbloom.com/#organization",
-    "url": "https://letherbloom.com",
+    "@id": "https://www.lhbloom.org/#organization",
+    "url": "https://www.lhbloom.org",
     "description": "Empowering women through focused upper-body strength, mobility, and confidence-building workouts.",
     "address": {
       "@type": "PostalAddress",
