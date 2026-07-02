@@ -146,6 +146,10 @@ type Meeting = {
   start_time: string;
   meeting_number: string;
   meeting_password?: string;
+  details?: {
+    description?: string;
+    recurrence?: string;
+  };
 };
 
 // Detect if user is on mobile device
@@ -269,9 +273,21 @@ function LiveTrainingContent() {
                         className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-zinc-100 bg-zinc-50 p-4 transition hover:bg-zinc-100"
                       >
                         <div className="space-y-1">
-                          <h3 className="font-semibold text-zinc-900">
-                            {meeting.title || "Live Training Session"}
-                          </h3>
+                          <div className="flex items-center gap-2">
+                            <h3 className="font-semibold text-zinc-900">
+                              {meeting.title || "Live Training Session"}
+                            </h3>
+                            {meeting.details?.recurrence && meeting.details.recurrence !== "none" && (
+                              <span className="inline-flex items-center rounded-full bg-rose-50 px-2 py-0.5 text-[10px] font-bold text-rose-700 capitalize border border-rose-200">
+                                ↻ {meeting.details.recurrence}
+                              </span>
+                            )}
+                          </div>
+                          {meeting.details?.description && (
+                            <p className="text-sm text-zinc-500 max-w-md">
+                              {meeting.details.description}
+                            </p>
+                          )}
                           <p className="text-rose-600 font-bold text-sm">
                             {formatLocalTime(meeting.start_time)}
                           </p>

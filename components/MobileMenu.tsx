@@ -89,14 +89,14 @@ export default function MobileMenu() {
                 </button>
 
                 {/* Top: Logo & Name */}
-                <div className="mt-8 flex flex-col items-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-lg">
+                <div className="mt-4 flex flex-col items-center">
+                  <div className="flex items-center justify-center">
                     <Image
-                      src="/hero-arm.svg"
+                      src="/logo/logo-full-transparent.png"
                       alt="LetHerBloom Logo"
-                      width={200}
-                      height={200}
-                      className="h-auto w-auto"
+                      width={1080}
+                      height={1080}
+                      className="h-14 w-auto object-contain rounded-full"
                     />
                   </div>
                   <span className="mt-2 text-xl font-bold text-rose-700">LetHerBloom</span>

@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import OurStorySection from "@/components/about/OurStorySection";
 import OurMissionSection from "@/components/about/OurMissionSection";
@@ -6,9 +7,87 @@ import GallerySection from "@/components/GallerySection";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
+export const metadata: Metadata = {
+  title: "About Us | LetHerBloom - Ladies Upper Body Gym & Gymnastics",
+  description: "Learn about the mission and vision of LetHerBloom, a dedicated virtual gym for ladies' upper body calisthenics, strength, and gymnastics training.",
+  keywords: [
+    "about ladies upper body gym",
+    "women's upper body training story",
+    "female calisthenics mission",
+    "virtual gymnastics for ladies",
+    "women's posture correction coaching",
+    "online ladies fitness community"
+  ],
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Us | LetHerBloom - Ladies Upper Body Gym & Gymnastics",
+    description: "Learn about the mission and vision of LetHerBloom, a dedicated virtual gym for ladies' upper body calisthenics, strength, and gymnastics training.",
+    url: "https://letherbloom.com/about",
+    siteName: "LetHerBloom",
+    images: [
+      {
+        url: "/images/Gemini_Generated_Image_tunm5xtunm5xtunm.png",
+        width: 1200,
+        height: 630,
+        alt: "About LetHerBloom",
+      },
+    ],
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | LetHerBloom - Ladies Upper Body Gym & Gymnastics",
+    description: "Learn about the mission and vision of LetHerBloom, a dedicated virtual gym for ladies' upper body calisthenics.",
+    images: ["/images/Gemini_Generated_Image_tunm5xtunm5xtunm.png"],
+  },
+};
+
 export default function AboutPage() {
-    return (
-        <div className="bg-white font-sans text-foreground">
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://letherbloom.com/about/#webpage",
+        "url": "https://letherbloom.com/about",
+        "name": "About Us | LetHerBloom",
+        "description": "Learn about the mission, vision, and story of LetHerBloom - the leading virtual gymnastics and calisthenics space for women.",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://letherbloom.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "About",
+              "item": "https://letherbloom.com/about"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "SportsOrganization",
+        "@id": "https://letherbloom.com/#organization",
+        "name": "LetHerBloom",
+        "url": "https://letherbloom.com",
+        "logo": "https://letherbloom.com/logo/flower-logo.png"
+      }
+    ]
+  };
+
+  return (
+    <div className="bg-white font-sans text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
             <Navigation />
 
             {/* Hero for About Page */}

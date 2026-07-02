@@ -24,7 +24,7 @@ export default function OurVisionSection() {
                                 We envision a future where every woman embraces her strength without apology. Where fitness is not a punishment, but a celebration of what your body can do amd a window into wellness.
                             </p>
                             <p>
-                                By combining physical training with mindfulness and community support, we are building a legacy of health that extends far beyond the gym walls. We want you to feel vibrant, centered, and unstoppable.
+                                By combining virtual training with mindfulness and community support, we are building a legacy of health that extends far beyond the gym walls. We want you to feel vibrant, centered, and unstoppable.
                             </p>
                         </div>
 

@@ -14,7 +14,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const detailsObj = details ? { description: String(details) } : null;
+    const detailsObj = {
+      description: details ? String(details) : "",
+      recurrence: body.recurrence || "none",
+    };
 
     const { data, error } = await supabase.from("meetings").insert({
       title: title || null,
@@ -76,7 +79,12 @@ export async function PATCH(req: Request) {
     if (body.meeting_number !== undefined) allowedFields.meeting_number = body.meeting_number;
     if (body.meeting_password !== undefined) allowedFields.meeting_password = body.meeting_password;
     if (body.start_time !== undefined) allowedFields.start_time = body.start_time ? new Date(body.start_time).toISOString() : null;
-    if (body.details !== undefined) allowedFields.details = body.details ? { description: String(body.details) } : null;
+    if (body.details !== undefined || body.recurrence !== undefined) {
+      allowedFields.details = {
+        description: body.details !== undefined ? String(body.details) : "",
+        recurrence: body.recurrence || "none",
+      };
+    }
     if (body.is_ended !== undefined) allowedFields.is_ended = body.is_ended;
     if (body.allowed_plans !== undefined) allowedFields.allowed_plans = Array.isArray(body.allowed_plans) ? body.allowed_plans : [];
 

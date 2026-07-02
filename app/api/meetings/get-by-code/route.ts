@@ -44,17 +44,52 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    const meetings = (allMeetings || []).filter((m: any) => {
-      // Map legacy "Organization" plan to "Corporate Group" to match the available plans
-      const effectivePlan = userPlan === "Organization" ? "Corporate Group" : userPlan;
+    const nowLocal = new Date();
+    const meetings = (allMeetings || [])
+      .map((m: any) => {
+        let startTime = m.start_time ? new Date(m.start_time) : null;
+        const recurrence = m.details?.recurrence;
 
-      // They can only see the meeting if their specific plan is included in the allowed plans
-      if (!m.allowed_plans || !Array.isArray(m.allowed_plans) || m.allowed_plans.length === 0) {
-        return false;
-      }
+        if (startTime && recurrence && recurrence !== "none") {
+          let durationMs = 0;
+          if (recurrence === "daily") {
+            durationMs = 4 * 60 * 60 * 1000; // 4 hours active window
+          } else if (recurrence === "weekly") {
+            durationMs = 24 * 60 * 60 * 1000; // 24 hours active window
+          } else if (recurrence === "monthly") {
+            durationMs = 24 * 60 * 60 * 1000; // 24 hours active window
+          }
 
-      return m.allowed_plans.includes(effectivePlan);
-    });
+          // If the start time + duration has already passed, compute the next occurrence
+          while (new Date(startTime.getTime() + durationMs) < nowLocal) {
+            if (recurrence === "daily") {
+              startTime.setDate(startTime.getDate() + 1);
+            } else if (recurrence === "weekly") {
+              startTime.setDate(startTime.getDate() + 7);
+            } else if (recurrence === "monthly") {
+              startTime.setMonth(startTime.getMonth() + 1);
+            } else {
+              break;
+            }
+          }
+        }
+
+        return {
+          ...m,
+          start_time: startTime ? startTime.toISOString() : m.start_time,
+        };
+      })
+      .filter((m: any) => {
+        // Map legacy "Organization" plan to "Corporate Group" to match the available plans
+        const effectivePlan = userPlan === "Organization" ? "Corporate Group" : userPlan;
+
+        // They can only see the meeting if their specific plan is included in the allowed plans
+        if (!m.allowed_plans || !Array.isArray(m.allowed_plans) || m.allowed_plans.length === 0) {
+          return false;
+        }
+
+        return m.allowed_plans.includes(effectivePlan);
+      });
 
     return NextResponse.json({ meetings });
   } catch (err: any) {

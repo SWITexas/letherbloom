@@ -11,6 +11,7 @@ export default function AdminMeetingsPage() {
   const [startTime, setStartTime] = useState("");
   const [details, setDetails] = useState("");
   const [allowedPlans, setAllowedPlans] = useState<string[]>([]);
+  const [recurrence, setRecurrence] = useState("none");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -42,6 +43,7 @@ export default function AdminMeetingsPage() {
         start_time: startTime ? new Date(startTime).toISOString() : null,
         details: details || null,
         allowed_plans: allowedPlans,
+        recurrence,
       };
 
       const res = await fetch("/api/admin/meetings", {
@@ -61,6 +63,7 @@ export default function AdminMeetingsPage() {
       setStartTime("");
       setDetails("");
       setAllowedPlans([]);
+      setRecurrence("none");
     } catch (err: any) {
       setMessage(err.message || "Unknown error");
     } finally {
@@ -99,6 +102,16 @@ export default function AdminMeetingsPage() {
           </div>
 
           <div>
+            <label className="mb-1 block text-sm font-medium">Recurrence</label>
+            <select value={recurrence} onChange={(e) => setRecurrence(e.target.value)} className="w-full rounded border px-3 py-2 bg-white">
+              <option value="none">None (One-time meeting)</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+
+          <div>
             <label className="mb-1 block text-sm font-medium">Event Description</label>
             <textarea value={details} onChange={(e) => setDetails(e.target.value)} placeholder="Event description" className="w-full rounded border px-3 py-2" rows={4} />
           </div>
@@ -123,7 +136,7 @@ export default function AdminMeetingsPage() {
 
           <div className="flex items-center gap-3">
             <button disabled={isLoading} className="rounded bg-rose-600 px-4 py-2 text-white disabled:opacity-50">{isLoading ? "Creating..." : "Create Meeting"}</button>
-            <button type="button" onClick={() => { setTitle(""); setMeetingNumber(""); setMeetingPassword(""); setStartTime(""); setDetails(""); setAllowedPlans([]); setMessage(null); }} className="rounded border px-4 py-2">Reset</button>
+            <button type="button" onClick={() => { setTitle(""); setMeetingNumber(""); setMeetingPassword(""); setStartTime(""); setDetails(""); setAllowedPlans([]); setRecurrence("none"); setMessage(null); }} className="rounded border px-4 py-2">Reset</button>
           </div>
 
           {message && (

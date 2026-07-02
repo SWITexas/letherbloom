@@ -21,7 +21,7 @@ export default function HeroSection() {
                     Achieve Your Fitness Goals
                   </p>
                   <h1 className="text-5xl font-black leading-tight text-zinc-900 md:text-6xl lg:text-7xl xl:text-8xl">
-                    Find Your <span className="text-rose-600">Strength</span>
+                    <span className="text-zinc-700">Find Your</span> <span className="text-rose-600">Strength</span>
                   </h1>
                 </div>
 

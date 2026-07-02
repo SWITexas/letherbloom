@@ -10,19 +10,19 @@ export default function Navigation() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-rose-100 bg-white/95 backdrop-blur">
-      <div className="mx-auto max-w-7xl px-6 py-4 lg:px-12 xl:px-16">
+      <div className="mx-auto 2xl:max-w-8xl xl:max-w-7xl lg:max-w-6xl max-w-5xl px-6 py-4 ">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg">
+            <div className="flex items-center justify-center">
               <Image
-                src="/hero-arm.svg"
+                src="/logo/logo-full-transparent.png"
                 alt="LetHerBloom Logo"
-                width={200}
-                height={200}
-                className="h-25 w-20"
+                width={1080}
+                height={1080}
+                className="h-20 w-auto object-contain rounded-full"
               />
             </div>
-            <span className="text-xl font-bold text-rose-700">LetHerBloom</span>
+            <span className="text-2xl font-bold text-rose-700">LetHerBloom</span>
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -32,7 +32,7 @@ export default function Navigation() {
                 href={item === "About" ? "/about" : `/#${item.toLowerCase()}`}
                 className="group"
               >
-                <span className="text-sm font-medium text-zinc-700 transition hover:text-rose-600 block group-hover:scale-105">
+                <span className="text-xl xl:text-lg font-medium text-zinc-700 transition hover:text-rose-600 block group-hover:scale-105">
                   {item}
                 </span>
               </Link>
@@ -42,7 +42,7 @@ export default function Navigation() {
           <div className="hidden md:block">
             <Link
               href="/live-training"
-              className="rounded-full bg-rose-600 px-6 py-2 text-sm font-semibold text-white shadow-md transition hover:scale-105 active:scale-95"
+              className="rounded-full bg-rose-600 px-6 py-2 text-xl lg:text-lg font-semibold text-white shadow-md transition hover:scale-105 active:scale-95"
             >
               Join Today
             </Link>

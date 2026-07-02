@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf6f0;
+  --foreground: #38463d;
 }
 
 @theme inline {
@@ -10,12 +10,46 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Overriding default rose palette with the flower pink colors from the logo */
+  --color-rose-50: #faf6f0;       /* Logo cream background */
+  --color-rose-100: #fcebeb;      /* Extra light pink */
+  --color-rose-200: #f7ced5;      /* Light pink */
+  --color-rose-300: #efa3b5;      /* Mid-light pink */
+  --color-rose-400: #e27d94;      /* Mid pink */
+  --color-rose-500: #c94f6c;      /* Main brand pink (medium dark) */
+  --color-rose-600: #a73c55;      /* Dark pink */
+  --color-rose-700: #882b40;      /* Deep pink */
+  --color-rose-800: #6f2334;      /* Very deep pink */
+  --color-rose-900: #5d1f2c;      /* Darkest pink */
+  --color-rose-950: #340e16;      /* Near black-pink */
+
+  /* Overriding neutral gray palette (zinc) with logo charcoal/slate-olive tones */
+  --color-zinc-50: #f5f6f5;
+  --color-zinc-100: #e9ebe9;
+  --color-zinc-200: #d0d5d1;
+  --color-zinc-300: #abb2ad;
+  --color-zinc-400: #818c84;
+  --color-zinc-500: #626d66;
+  --color-zinc-600: #4c554f;
+  --color-zinc-700: #38463d;      /* Logo LetHerBloom text color */
+  --color-zinc-800: #2d3530;
+  --color-zinc-900: #222925;
+  --color-zinc-950: #101412;
+
+  /* Custom brand accent colors from the logo */
+  --color-brand-cream: #faf6f0;
+  --color-brand-charcoal: #38463d;
+  --color-brand-gold: #ab865f;
+  --color-brand-sage: #8b9e8b;
+  --color-brand-yellow: #d9aa50;
+  --color-brand-pink: #efa3b5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #101412;
+    --foreground: #e9ebe9;
   }
 }
 
@@ -27,8 +61,8 @@ body {
 
 /* LetHerBloom landing page additions */
 :root {
-  --foreground: #2b2b2b;
-  --rose-50: #fff1f2;
+  --foreground: #38463d;
+  --rose-50: #faf6f0;
 }
 
 .text-foreground { color: var(--foreground); }

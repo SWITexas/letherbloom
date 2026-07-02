@@ -60,7 +60,40 @@ export default function MeetingsListPage() {
 
       if (exError) throw exError;
       // ... (fetchMeetings continues, just adding state above)
-      setUpcoming(upData || []);
+      const nowLocal = new Date();
+      const processedUpcoming = (upData || []).map((m: any) => {
+        let startTime = m.start_time ? new Date(m.start_time) : null;
+        const recurrence = m.details?.recurrence;
+
+        if (startTime && recurrence && recurrence !== "none") {
+          let durationMs = 0;
+          if (recurrence === "daily") {
+            durationMs = 4 * 60 * 60 * 1000; // 4 hours active window
+          } else if (recurrence === "weekly") {
+            durationMs = 24 * 60 * 60 * 1000; // 24 hours active window
+          } else if (recurrence === "monthly") {
+            durationMs = 24 * 60 * 60 * 1000; // 24 hours active window
+          }
+
+          while (new Date(startTime.getTime() + durationMs) < nowLocal) {
+            if (recurrence === "daily") {
+              startTime.setDate(startTime.getDate() + 1);
+            } else if (recurrence === "weekly") {
+              startTime.setDate(startTime.getDate() + 7);
+            } else if (recurrence === "monthly") {
+              startTime.setMonth(startTime.getMonth() + 1);
+            } else {
+              break;
+            }
+          }
+        }
+        return {
+          ...m,
+          start_time: startTime ? startTime.toISOString() : m.start_time
+        };
+      });
+
+      setUpcoming(processedUpcoming);
       setTotalUpcoming(upCount || 0);
 
       setExpired(exData || []);
@@ -105,6 +138,7 @@ export default function MeetingsListPage() {
       start_time: localStartTime,
       details: meeting.details?.description || "",
       allowed_plans: Array.isArray(meeting.allowed_plans) ? meeting.allowed_plans : [],
+      recurrence: meeting.details?.recurrence || "none",
     });
   };
 
@@ -121,8 +155,13 @@ export default function MeetingsListPage() {
     setIsUpdating(true);
     try {
       const payload = {
-        ...editForm,
+        title: editForm.title,
+        meeting_number: editForm.meeting_number,
+        meeting_password: editForm.meeting_password,
         start_time: editForm.start_time ? new Date(editForm.start_time).toISOString() : null,
+        details: editForm.details,
+        recurrence: editForm.recurrence,
+        allowed_plans: editForm.allowed_plans,
       };
 
       const res = await fetch(`/api/admin/meetings?id=${editingId}`, {
@@ -253,9 +292,20 @@ export default function MeetingsListPage() {
                           <input disabled={!!deletingId} className="border rounded px-3 py-2 text-sm disabled:opacity-50" value={editForm.meeting_password} onChange={e => setEditForm({ ...editForm, meeting_password: e.target.value })} placeholder="Password" />
                         </div>
                       </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-xs font-semibold text-zinc-500">Description</label>
-                        <textarea disabled={!!deletingId} className="w-full border rounded px-3 py-2 text-sm disabled:opacity-50" rows={2} value={editForm.details} onChange={e => setEditForm({ ...editForm, details: e.target.value })} placeholder="Description" />
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs font-semibold text-zinc-500">Description</label>
+                          <textarea disabled={!!deletingId} className="w-full border rounded px-3 py-2 text-sm disabled:opacity-50" rows={2} value={editForm.details} onChange={e => setEditForm({ ...editForm, details: e.target.value })} placeholder="Description" />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label className="text-xs font-semibold text-zinc-500">Recurrence</label>
+                          <select disabled={!!deletingId} value={editForm.recurrence} onChange={e => setEditForm({ ...editForm, recurrence: e.target.value })} className="w-full border rounded px-3 py-2 text-sm bg-white disabled:opacity-50">
+                            <option value="none">None (One-time meeting)</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                          </select>
+                        </div>
                       </div>
                       <div className="flex flex-col gap-1">
                         <label className="text-xs font-semibold text-zinc-500">Allowed Plans (Access Control)</label>
@@ -293,7 +343,14 @@ export default function MeetingsListPage() {
                   ) : (
                     <div className="flex justify-between items-start">
                       <div>
-                        <div className="text-lg font-bold text-zinc-900">{m.title || "Untitled Session"}</div>
+                        <div className="flex items-center gap-2">
+                          <div className="text-lg font-bold text-zinc-900">{m.title || "Untitled Session"}</div>
+                          {m.details?.recurrence && m.details.recurrence !== "none" && (
+                            <span className="inline-flex items-center rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-semibold text-rose-700 capitalize border border-rose-200">
+                              ↻ {m.details.recurrence}
+                            </span>
+                          )}
+                        </div>
                         <div className="text-sm text-zinc-500 mt-1 max-w-md">{m.details?.description}</div>
                         <div className="flex gap-4 mt-4">
                           <button disabled={!!deletingId} onClick={() => startEdit(m)} className="text-xs font-bold text-rose-600 hover:text-rose-700 uppercase tracking-wider disabled:opacity-50">Edit</button>
@@ -363,7 +420,14 @@ export default function MeetingsListPage() {
                 <div key={m.id} className="rounded-xl border bg-white p-5 opacity-75 shadow-sm">
                   <div className="flex justify-between items-start">
                     <div>
-                      <div className="text-lg font-bold text-zinc-700">{m.title || "Untitled Session"}</div>
+                      <div className="flex items-center gap-2">
+                        <div className="text-lg font-bold text-zinc-700">{m.title || "Untitled Session"}</div>
+                        {m.details?.recurrence && m.details.recurrence !== "none" && (
+                          <span className="inline-flex items-center rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-semibold text-rose-700 capitalize border border-rose-200">
+                            ↻ {m.details.recurrence}
+                          </span>
+                        )}
+                      </div>
                       <div className="text-sm text-zinc-400">{m.details?.description}</div>
                       <button disabled={!!deletingId} onClick={() => handleMarkAsEnded(m.id, false)} className="text-xs font-semibold text-rose-600 hover:underline mt-3 disabled:opacity-50">Restore to Active</button>
                     </div>

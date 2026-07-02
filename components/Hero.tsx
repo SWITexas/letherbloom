@@ -9,7 +9,7 @@ export default function Hero() {
     <header className="relative overflow-hidden rounded-2xl bg-white/80 p-8 shadow-lg">
       <div className="absolute -right-24 -top-24 opacity-30 rotate-12">
         <Image
-          src="/flowers-decor.svg"
+          src="/logo/logo-full-transparent.png"
           alt="flowers"
           width={420}
           height={420}

@@ -11,7 +11,7 @@ export default function PricingSection({
 }) {
   const [eliteDuration, setEliteDuration] = useState(3); // months
 
-  const eliteMonthlyPrice = 59;
+  const eliteMonthlyPrice = 39.99;
   const eliteTotalPrice = eliteMonthlyPrice * eliteDuration;
 
   const getTiers = () => {
@@ -40,7 +40,7 @@ export default function PricingSection({
         return [
           {
             name: "Individual Group",
-            price: "39",
+            price: "39.99",
             priceNote: "month",
             description: "Join our vibrant community for group training.",
             features: [
@@ -54,8 +54,8 @@ export default function PricingSection({
           },
           {
             name: "Corporate Group",
-            price: "15",
-            priceNote: "per user/month",
+            price: "29.99",
+            priceNote: "group/month",
             description: "Structured group training for organizations.",
             features: [
               "Dedicated class slots",

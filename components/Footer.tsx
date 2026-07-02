@@ -43,13 +43,13 @@ export default function Footer() {
           >
             <div className="md:col-span-1">
               <Link href="/" className="flex items-center gap-2">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg ">
+                <div className="flex items-center justify-center">
                   <Image
-                    src="/hero-arm.svg"
+                    src="/logo/flower-logo.png"
                     alt="LetHerBloom Logo"
                     width={40}
                     height={40}
-                    className="h-8 w-8"
+                    className="h-8 w-auto object-contain"
                   />
                 </div>
                 <span className="text-2xl font-bold text-rose-500">LetHerBloom</span>

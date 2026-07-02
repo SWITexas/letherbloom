@@ -21,7 +21,7 @@ export default function PhilosophySection() {
                             Your Body is Your <span className="text-rose-400">Temple</span>
                         </h2>
                         <p className="mt-6 text-lg text-zinc-300 md:text-xl leading-relaxed">
-                            Strength isn't just physical. It's the mental fortitude to push through barriers, the confidence to stand tall, and the resilience to bloom in any season. We believe in holistic training that nurtures both the body and the mind.
+                            Strength isn't just about the body. It's the mental fortitude to push through barriers, the confidence to stand tall, and the resilience to bloom in any season. We believe in holistic training that nurtures both the body and the mind.
                         </p>
 
                         <div className="mt-8 flex gap-4">

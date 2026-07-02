@@ -10,7 +10,7 @@ export default function PlansSection({
   const [trainingType, setTrainingType] = useState<"personal" | "group" | "functional">("personal");
   const [eliteDuration, setEliteDuration] = useState(3); // months
 
-  const eliteMonthlyPrice = 59;
+  const eliteMonthlyPrice = 39.99;
   const eliteTotalPrice = eliteMonthlyPrice * eliteDuration;
 
   const getPlans = () => {
@@ -19,8 +19,8 @@ export default function PlansSection({
         return [
           {
             name: "Personal Training",
-            price: eliteTotalPrice.toString(),
-            priceNote: `for ${eliteDuration} months`,
+            price: "39.99",
+            priceNote: "per session",
             description: "One-on-one sessions tailored specifically to your goals and pace.",
             features: [
               "Custom workout plans",
@@ -41,8 +41,8 @@ export default function PlansSection({
         return [
           {
             name: "Individual Group",
-            price: "39",
-            priceNote: "month",
+            price: "39.99",
+            priceNote: "per month",
             description: "Join our vibrant community for group training.",
             features: [
               "Unlimited group classes",
@@ -55,8 +55,8 @@ export default function PlansSection({
           },
           {
             name: "Corporate Group",
-            price: "15",
-            priceNote: "per user/month",
+            price: "29.99",
+            priceNote: "per group",
             description: "Structured group training for organizations.",
             features: [
               "Dedicated class slots",
@@ -106,10 +106,18 @@ export default function PlansSection({
         {/* Improved Training Type Selector Cards */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl px-4">
           {trainingOptions.map((opt) => (
-            <button
+            <div
               key={opt.type}
+              role="button"
+              tabIndex={0}
               onClick={() => setTrainingType(opt.type as any)}
-              className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all duration-300 ${trainingType === opt.type
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setTrainingType(opt.type as any);
+                }
+              }}
+              className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${trainingType === opt.type
                 ? "border-rose-600 bg-rose-50 shadow-md ring-1 ring-rose-600"
                 : "border-zinc-200 bg-white hover:border-rose-200 hover:bg-zinc-50"
                 }`}
@@ -119,7 +127,7 @@ export default function PlansSection({
                 }`}>
                 {opt.label}
               </span>
-            </button>
+            </div>
           ))}
         </div>
       </div>
