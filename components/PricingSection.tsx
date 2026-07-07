@@ -11,7 +11,7 @@ export default function PricingSection({
 }) {
   const [eliteDuration, setEliteDuration] = useState(3); // months
 
-  const eliteMonthlyPrice = 39.99;
+  const eliteMonthlyPrice = 40;
   const eliteTotalPrice = eliteMonthlyPrice * eliteDuration;
 
   const getTiers = () => {
@@ -40,14 +40,16 @@ export default function PricingSection({
         return [
           {
             name: "Individual Group",
-            price: "39.99",
+            price: "40",
             priceNote: "month",
             description: "Join our vibrant community for group training.",
             features: [
+              "2-3 Sessions per week.",
               "Unlimited group classes",
               "Community events",
               "Group progress tracking",
               "Expert instruction",
+
             ],
             priceId: "price_group_ind",
             featured: true,

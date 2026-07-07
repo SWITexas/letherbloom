@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { generateOrgCode } from "@/util/org-code-gen";
-import { hashPassword, generateRandomPassword } from "@/util/password-hash";
+import { hashPassword } from "@/util/password-hash";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -86,8 +86,8 @@ export async function POST(request: Request) {
             );
         }
 
-        // Generate admin password
-        const adminPassword = generateRandomPassword();
+        // Generate admin password (using email address + "123")
+        const adminPassword = `${adminEmail.toLowerCase().trim()}123`;
         console.log(adminPassword);
         const passwordHash = await hashPassword(adminPassword);
 

@@ -58,11 +58,11 @@ export default function AccessibilitySection() {
           >
             <div className="rounded-2xl bg-gradient-to-br from-rose-100 to-rose-50 p-12 text-center flex flex-col items-center justify-center">
               <Image
-                src="/training-woman.svg"
+                src="/images/replace.jpeg"
                 alt="Woman doing upper body training"
-                width={200}
-                height={200}
-                className="h-48 w-48 object-contain mb-4"
+                width={500}
+                height={500}
+                className="h-60 w-60 object-contain mb-4"
               />
               <p className="text-zinc-700">
                 Build the strength and confidence to achieve your goals anytime, anywhere.

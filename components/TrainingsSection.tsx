@@ -16,15 +16,17 @@ function TrainingTypeCard({ title, description, icon, isActive, onClick }: Train
     <motion.div
       whileHover={{ y: -8 }}
       onClick={onClick}
-      className="cursor-pointer"
+      className="cursor-pointer h-full"
     >
-      <div className={`overflow-hidden rounded-2xl p-8 transition-all duration-300 shadow-lg text-white h-full border-2 ${isActive
+      <div className={`overflow-hidden rounded-2xl p-8 transition-all duration-300 shadow-lg text-white h-full border-2 flex flex-col justify-between ${isActive
         ? "bg-gradient-to-br from-rose-500 to-rose-700 border-rose-400 scale-105 z-10"
         : "bg-zinc-800 border-zinc-700 hover:border-zinc-500 opacity-80 hover:opacity-100"
         }`}>
-        <div className="mb-4 text-4xl">{icon}</div>
-        <h3 className="text-2xl font-bold">{title}</h3>
-        <p className="mt-3 text-base opacity-90 leading-relaxed">{description}</p>
+        <div>
+          <div className="mb-4 text-4xl">{icon}</div>
+          <h3 className="text-2xl font-bold">{title}</h3>
+          <p className="mt-3 text-base opacity-90 leading-relaxed">{description}</p>
+        </div>
         <div className={`mt-6 inline-flex items-center text-sm font-bold ${isActive ? "text-white" : "text-rose-400"}`}>
           {isActive ? "Selected" : "Select Training"}
           <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,13 +87,14 @@ export default function TrainingsSection({
           </div>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3 min-w-2xl min-h-40">
           {trainings.map((training, index) => (
             <motion.div
               key={training.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="h-full"
             >
               <TrainingTypeCard
                 {...training}
