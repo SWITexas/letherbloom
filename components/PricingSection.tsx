@@ -9,10 +9,6 @@ export default function PricingSection({
   selectedType: "personal" | "group" | "functional";
   onTypeChange: (type: "personal" | "group" | "functional") => void;
 }) {
-  const [eliteDuration, setEliteDuration] = useState(3); // months
-
-  const eliteMonthlyPrice = 40;
-  const eliteTotalPrice = eliteMonthlyPrice * eliteDuration;
 
   const getTiers = () => {
     switch (selectedType) {
@@ -20,8 +16,8 @@ export default function PricingSection({
         return [
           {
             name: "Personal Training",
-            price: eliteTotalPrice.toString(),
-            priceNote: `for ${eliteDuration} months`,
+            price: "40",
+            priceNote: "per session",
             description: "One-on-one sessions tailored specifically to your goals and pace.",
             features: [
               "Custom workout plans",
@@ -31,7 +27,6 @@ export default function PricingSection({
               "Monthly form check-ins",
               "Direct messaging with trainer",
             ],
-            hasSelector: true,
             priceId: "price_1Elite",
             featured: true,
           },
@@ -41,7 +36,7 @@ export default function PricingSection({
           {
             name: "Individual Group",
             price: "40",
-            priceNote: "month",
+            priceNote: "per session",
             description: "Join our vibrant community for group training.",
             features: [
               "2-3 Sessions per week.",
@@ -57,7 +52,7 @@ export default function PricingSection({
           {
             name: "Corporate Group",
             price: "29.99",
-            priceNote: "group/month",
+            priceNote: "per group session",
             description: "Structured group training for organizations.",
             features: [
               "Dedicated class slots",
@@ -73,7 +68,7 @@ export default function PricingSection({
           {
             name: "Functional Core",
             price: "49",
-            priceNote: "month",
+            priceNote: "per session",
             description: "Master real-world movement and strength.",
             features: [
               "Mobility workshops",
@@ -107,7 +102,9 @@ export default function PricingSection({
             <h2 className="mt-2 text-4xl font-bold text-zinc-900 md:text-5xl">
               Investment for <span className="capitalize">{selectedType}</span>
             </h2>
-            <p className="mt-4 text-zinc-600">Transparent pricing for your transformation</p>
+            <p className="mt-4 text-zinc-600">
+              Billed per session. Sessions are typically scheduled 3 to 4 times a month.
+            </p>
           </div>
         </motion.div>
 
@@ -127,8 +124,6 @@ export default function PricingSection({
                   {/* @ts-ignore - PlanCard props mismatch with tiers object */}
                   <PlanCard
                     {...tier}
-                    eliteDuration={tier.name === "Personal Training" ? eliteDuration : undefined}
-                    onDurationChange={tier.name === "Personal Training" ? setEliteDuration : undefined}
                   />
                 </div>
               ))}

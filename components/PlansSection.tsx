@@ -5,13 +5,9 @@ import Link from "next/link";
 export default function PlansSection({
   onSelect,
 }: {
-  onSelect?: (plan: { name: string; priceId: string; duration?: number }) => void;
+  onSelect?: (plan: { name: string; priceId: string }) => void;
 }) {
   const [trainingType, setTrainingType] = useState<"personal" | "group" | "functional">("personal");
-  const [eliteDuration, setEliteDuration] = useState(3); // months
-
-  const eliteMonthlyPrice = 39.99;
-  const eliteTotalPrice = eliteMonthlyPrice * eliteDuration;
 
   const getPlans = () => {
     switch (trainingType) {
@@ -19,7 +15,7 @@ export default function PlansSection({
         return [
           {
             name: "Personal Training",
-            price: "39.99",
+            price: "40",
             priceNote: "per session",
             description: "One-on-one sessions tailored specifically to your goals and pace.",
             features: [
@@ -31,9 +27,6 @@ export default function PlansSection({
               "Direct messaging with trainer",
             ],
             priceId: "price_1Elite",
-            hasSelector: true,
-            eliteDuration: eliteDuration,
-            onDurationChange: setEliteDuration,
             featured: true,
           },
         ];
@@ -42,7 +35,7 @@ export default function PlansSection({
           {
             name: "Individual Group",
             price: "39.99",
-            priceNote: "per month",
+            priceNote: "per session",
             description: "Join our vibrant community for group training.",
             features: [
               "Unlimited group classes",
@@ -56,7 +49,7 @@ export default function PlansSection({
           {
             name: "Corporate Group",
             price: "29.99",
-            priceNote: "per group",
+            priceNote: "per group session",
             description: "Structured group training for organizations.",
             features: [
               "Dedicated class slots",
@@ -71,8 +64,8 @@ export default function PlansSection({
         return [
           {
             name: "Functional Core",
-            price: "49",
-            priceNote: "month",
+            price: "49.99",
+            priceNote: "per session",
             description: "Master real-world movement and strength.",
             features: [
               "Mobility workshops",
@@ -101,7 +94,9 @@ export default function PlansSection({
     <section id="plans" className="mt-8 mb-12">
       <div className="flex flex-col items-center justify-center mb-12">
         <h2 className="text-4xl font-bold text-zinc-900 md:text-5xl">Select Your Training</h2>
-        <p className="mt-4 text-zinc-600">Choose a category to view tailored plans</p>
+        <p className="mt-4 text-zinc-600 text-center max-w-2xl px-4">
+          Choose a category to view tailored plans. Billed per session (sessions are typically held 3 to 4 times a month).
+        </p>
 
         {/* Improved Training Type Selector Cards */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl px-4">
@@ -139,7 +134,7 @@ export default function PlansSection({
             {currentPlans.map((plan) => (
               <div key={plan.name} className="h-full w-full">
                 {/* @ts-ignore - PlanCard props mismatch with dynamic Elite props */}
-                <PlanCard {...plan} onSelect={onSelect ? (p) => onSelect({ ...p, duration: plan.eliteDuration }) : undefined} />
+                <PlanCard {...plan} onSelect={onSelect ? (p) => onSelect(p) : undefined} />
               </div>
             ))}
           </div>

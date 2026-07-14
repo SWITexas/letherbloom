@@ -43,26 +43,20 @@ export async function POST(request: Request) {
 
     if (isPlaceholder) {
       // Use inline price data for development without creating products in Stripe Dashboard
-      let unitAmount = 2900; // Default Basic
-      let mode: Stripe.Checkout.SessionCreateParams.Mode = "subscription";
-      let recurring: Stripe.Checkout.SessionCreateParams.LineItem.PriceData.Recurring | undefined = {
-        interval: "month",
-      };
+      let unitAmount = 4000; // Default Personal Training
+      let mode: Stripe.Checkout.SessionCreateParams.Mode = "payment";
+      let description = "Single training session. Typically scheduled 3-4 times a month.";
 
-      if (planName === "Premium" || planName === "Individual Group") unitAmount = 3900;
-      if (planName === "Functional Core") unitAmount = 4900;
-
-      if (planName === "Elite" || planName === "Personal Training") {
-        const duration = requestBody.duration || 1;
-        unitAmount = 5900 * duration;
-        // For multi-month duration, treating as one-time payment for access period
-        mode = "payment";
-        recurring = undefined;
+      if (planName === "Individual Group") {
+        unitAmount = 3999;
+        description = "Individual group training session. Typically scheduled 3-4 times a month.";
+      } else if (planName === "Functional Core") {
+        unitAmount = 4999;
+        description = "Functional core training session. Typically scheduled 3-4 times a month.";
+      } else if (planName === "Personal Training") {
+        unitAmount = 4000;
+        description = "Personal training session. Typically scheduled 3-4 times a month.";
       }
-
-      // Legacy mapping fallback
-      if (planName === "Common") unitAmount = 2900; // Starter
-      if (planName === "Popular") unitAmount = 5900;
 
       sessionConfig.mode = mode;
       sessionConfig.line_items = [
@@ -71,21 +65,13 @@ export async function POST(request: Request) {
             currency: "usd",
             product_data: {
               name: `${planName} Plan`,
-              description: planName === "Elite"
-                ? `${requestBody.duration || 1} month(s) access`
-                : `Monthly subscription for ${planName} plan`,
+              description: description,
             },
             unit_amount: unitAmount,
-            recurring: recurring,
           },
           quantity: 1,
         },
       ];
-
-      // Add duration to metadata for webhook processing if Elite
-      if (planName === "Elite" && requestBody.duration) {
-        sessionConfig.metadata!.durationMonths = requestBody.duration.toString();
-      }
     } else {
       // Use the provided Price ID directly
       sessionConfig.line_items = [

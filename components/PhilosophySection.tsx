@@ -44,8 +44,8 @@ export default function PhilosophySection() {
                         <div className="absolute inset-0 bg-rose-500 rounded-3xl rotate-3 opacity-20 blur-2xl"></div>
                         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border-4 border-zinc-800 shadow-2xl">
                             <Image
-                                src="/images/Gemini_Generated_Image_8hllxj8hllxj8hll.png"
-                                alt="Woman meditating and training"
+                                src="/images/philosophy-group.png"
+                                alt="Women stretching and smiling during fitness training"
                                 fill
                                 className="object-cover"
                             />

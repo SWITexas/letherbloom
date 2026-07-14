@@ -128,7 +128,7 @@ export async function POST(req: Request) {
         let expVal = 1; // Default 1 month
         if (planName === "Premium") expVal = 3;
         if (planName === "Elite" || planName === "Personal Training") {
-          expVal = parseInt(session.metadata?.durationMonths || "6");
+          expVal = parseInt(session.metadata?.durationMonths || "1");
         }
 
         const expiresAt = new Date();
